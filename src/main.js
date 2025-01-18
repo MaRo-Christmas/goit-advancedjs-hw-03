@@ -13,24 +13,25 @@ form.addEventListener('submit', handleSearch);
 
 async function handleSearch(event) {
   event.preventDefault();
-  const form = event.currentTarget;
-  const userQuery = form.elements.user_query.value.trim();
-  if (userQuery == '') {
+  const userQuery = event.currentTarget.elements.user_query.value.trim();
+
+  if (!userQuery) {
     iziToast.show({
       title: 'Error',
-      message: 'Input cant be empty!',
+      message: 'Input cannot be empty!',
       position: 'center',
       color: 'red',
     });
     return;
   }
+
   galleryEl.innerHTML = '';
 
   try {
-    loaderEl.style.display = 'flex  ';
+    loaderEl.style.display = 'flex';
     const data = await getPhotos(userQuery);
 
-    if (data.total === 0) {
+    if (data.totalHits === 0) {
       iziToast.show({
         title: 'Warning',
         message:
