@@ -28,7 +28,7 @@ async function handleSearch(event) {
   galleryEl.innerHTML = '';
 
   try {
-    loaderEl.style.display = 'flex';
+    loaderEl.style.display = 'block';
     const data = await getPhotos(userQuery);
 
     if (data.totalHits === 0) {
